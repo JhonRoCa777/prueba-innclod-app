@@ -1,0 +1,68 @@
+<button class="btn btn-success" (click)="openModal()">Nuevo</button>
+
+<!-- Modal -->
+<div class="modal-backdrop fade show" *ngIf="showModal"></div>
+
+<div class="modal fade show d-block" *ngIf="showModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Crear Cliente</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+
+      <div class="modal-body">
+        <form [formGroup]="clientForm" (ngSubmit)="submitForm()">
+          <!-- Nombre Completo -->
+          <div class="mb-3">
+            <label class="form-label">Nombre Completo</label>
+            <input type="text" class="form-control" formControlName="fullname">
+            <div class="text-danger" *ngIf="clientForm.get('fullname')?.errors?.['required'] && clientForm.get('fullname')?.touched">
+              Campo obligatorio.
+            </div>
+
+            <div class="text-danger" *ngIf="clientForm.get('fullname')?.errors?.['maxlength'] && clientForm.get('fullname')?.touched">
+              Máximo 60 caracteres.
+            </div>
+          </div>
+
+          <!-- Documento -->
+          <div class="mb-3">
+            <label class="form-label">Documento</label>
+            <input type="text" class="form-control" formControlName="document">
+            <div class="text-danger" *ngIf="clientForm.get('document')?.errors?.['required'] && clientForm.get('document')?.touched">
+              Campo obligatorio.
+            </div>
+
+            <div class="text-danger" *ngIf="clientForm.get('document')?.errors?.['maxlength'] && clientForm.get('document')?.touched">
+              Máximo 60 caracteres.
+            </div>
+
+            <div class="text-danger" *ngIf="clientForm.get('document')?.errors?.['minlength'] && clientForm.get('document')?.touched">
+              Mínimo 8 caracteres.
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" formControlName="email">
+            <div class="text-danger" *ngIf="clientForm.get('email')?.errors?.['required'] && clientForm.get('email')?.touched">
+              Campo obligatorio.
+            </div>
+
+            <div class="text-danger" *ngIf="clientForm.get('email')?.errors?.['email'] && clientForm.get('email')?.touched">
+              Debe ser correo válido.
+            </div>
+          </div>
+
+          <!-- Botones -->
+          <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-secondary me-2" (click)="closeModal()">Cancelar</button>
+            <button type="submit" class="btn btn-success" [disabled]="clientForm.invalid">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
