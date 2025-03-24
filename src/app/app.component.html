@@ -2,21 +2,27 @@
 <div class="container mt-4">
 
   <div class="search">
-    <input id="document_search" class="form-control" placeholder="Documento" [(ngModel)]="documentSearch">
+    <input id="document_search" class="form-control" placeholder="Documento" [(ngModel)]="clientFullname">
     <button class="btn btn-info" (click)="searchClient()">Buscar</button>
 
-    <app-client-form/>
+    <button *ngIf="!client$.email"
+      class="btn btn-success" (click)="reset(); clientFormComponent.openModal();">Nuevo</button>
 
-    <button class="btn btn-secondary">X</button>
+    <button *ngIf="client$.email"
+      class="btn btn-warning" (click)="clientFormComponent.openModal()">Editar</button>
+
+    <button class="btn btn-secondary" (click)="reset()">X</button>
+
+    <app-client-form/>
   </div>
 
   <br>
 
-  <input id="name_response" class="form-control" [value]="clientName" disabled>
+  <input id="name_response" class="form-control" [value]="client$.fullname" disabled>
 
   <br>
 
-  <div class="client_details">
+  <div class="client_details" *ngIf="client$.email">
     <button class="btn btn-primary">Productos</button>
     <button class="btn btn-primary">Ordenes</button>
   </div>

@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ClientService } from './services/client.service';
-import { Client } from './models/client';
+import { Client, ClientIS } from './models/client';
+import { Subscription, take } from 'rxjs';
+import { ClientFormComponent } from './client-form/client-form.component';
+import { SweetUtilService } from './services/sweet-util.service';
 
 @Component({
   selector: 'app-root',
@@ -8,21 +11,37 @@ import { Client } from './models/client';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'prueba-innclod-app';
 
-  documentSearch: string = '';
-  clientName: string = '';
+  @ViewChild(ClientFormComponent) clientFormComponent!: ClientFormComponent;
+
+  clientFullname = '';
+
+  client$: Client = ClientIS;
+  private subscription!: Subscription;
 
   constructor(private clientService: ClientService) {}
 
-  searchClient() {
-    this.clientService.getByDocument(this.documentSearch).subscribe({
-      next: (client: Client) => {
-        this.clientName = client.fullname;
-      },
-      error: () => {
-        this.clientName = 'Cliente NO Encontrado';
-      }
+  ngOnInit() {
+    this.clientService.getClientSubject().subscribe(client => {
+      this.client$ = client;
     });
+  }
+
+  ngOnDestroy = () => this.subscription.unsubscribe();
+
+  reset = () => {
+    this.clientService.setClientSubject(ClientIS);
+    this.clientFullname = '';
+  }
+
+  searchClient() {
+    if(this.clientFullname){
+      this.clientService.getByDocument(this.clientFullname)
+      .pipe(take(1))
+      .subscribe({
+        next: (client) => this.clientService.setClientSubject(client),
+        error: () => SweetUtilService.warning("Cliente NO Encontrado")
+      });
+    }
   }
 }
