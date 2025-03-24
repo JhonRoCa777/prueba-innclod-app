@@ -2,8 +2,8 @@
 <div class="container mt-4">
 
   <div class="search">
-    <input id="document_search" class="form-control" placeholder="Documento">
-    <button class="btn btn-info">Buscar</button>
+    <input id="document_search" class="form-control" placeholder="Documento" [(ngModel)]="documentSearch">
+    <button class="btn btn-info" (click)="searchClient()">Buscar</button>
 
     <app-client-form/>
 
@@ -12,7 +12,7 @@
 
   <br>
 
-  <input id="name_response" class="form-control" placeholder="" disabled>
+  <input id="name_response" class="form-control" [value]="clientName" disabled>
 
   <br>
 
