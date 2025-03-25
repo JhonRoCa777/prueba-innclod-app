@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ClientService } from './services/client.service';
 import { Client, ClientIS } from './models/client';
 import { Subscription, take } from 'rxjs';
-import { ClientFormComponent } from './client-form/client-form.component';
+import { ClientFormComponent } from './components/client-form/client-form.component';
 import { SweetUtilService } from './services/sweet-util.service';
 
 @Component({

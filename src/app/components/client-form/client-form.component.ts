@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Client, ClientIS } from '../models/client';
+import { Client, ClientIS } from '../../models/client';
 import { Subscription, take } from 'rxjs';
-import { ClientService } from '../services/client.service';
-import { SweetUtilService } from '../services/sweet-util.service';
+import { ClientService } from '../../services/client.service';
+import { SweetUtilService } from '../../services/sweet-util.service';
 
 @Component({
   selector: 'app-client-form',

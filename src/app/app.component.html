@@ -22,11 +22,14 @@
 
   <br>
 
-  <div class="client_details" *ngIf="client$.email">
-    <button class="btn btn-primary">Productos</button>
-    <button class="btn btn-primary">Ordenes</button>
+  <div class="client_details">
+    <button class="btn btn-primary" [routerLink]="['products']">Productos</button>
+    <button class="btn btn-primary" [routerLink]="['orders']">Ordenes</button>
   </div>
+
+  <br>
+
+  <router-outlet></router-outlet>
 
 </div>
 
-<router-outlet></router-outlet>
