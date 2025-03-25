@@ -22,7 +22,7 @@
 
   <br>
 
-  <div class="client_details">
+  <div class="client_details" *ngIf="client$.email">
     <button class="btn btn-primary" [routerLink]="['products']">Productos</button>
     <button class="btn btn-primary" [routerLink]="['orders']">Ordenes</button>
   </div>

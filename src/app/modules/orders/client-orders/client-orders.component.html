@@ -1,1 +1,18 @@
-<p>client-orders works!</p>
+<div class="row">
+  <div class="col-md-4" *ngFor="let order of orderArray">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <strong>Fecha:</strong> {{ order.created_at | date:'short' }}
+      </div>
+      <div class="card-body">
+        <ul class="list-group">
+          <li *ngFor="let detail of order.order_details" class="list-group-item">
+            <strong>Nombre:</strong> {{ detail.product?.name }}
+            <br>
+            <strong>Cantidad:</strong> {{ detail.quantity }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

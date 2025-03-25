@@ -4,6 +4,7 @@ import { Client, ClientIS } from '../models/client';
 import { environment } from '../../environments/environment';
 import { BehaviorSubject } from 'rxjs';
 import { Product } from '../models/product';
+import { Order } from '../models/order';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,9 @@ export class ClientService {
 
   getProducts = (id: number) =>
     this.http.get<Client>(`${this.apiUrl}/${id}/products`);
+
+  getOrders = (id: number) =>
+    this.http.get<Order[]>(`${this.apiUrl}/${id}/orders`);
 
   create = (client: Client) =>
     this.http.post<Client>(`${this.apiUrl}`, client);
