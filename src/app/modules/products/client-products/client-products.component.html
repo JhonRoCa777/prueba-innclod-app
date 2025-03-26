@@ -1,1 +1,23 @@
-<p>client-products works!</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Producto</th>
+      <th scope="col">Stock</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">
+        <button class="btn btn-success" (click)="toOrder()">ORDENAR</button>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of productArray; let i = index">
+      <td>{{product.name}}</td>
+      <td>{{product.stock}}</td>
+      <td>{{requestArray[i].quantity}}</td>
+      <td class="actions">
+        <button class="btn btn-warning" (click)="increment(i, 1)">+</button>
+        <button class="btn btn-danger" (click)="increment(i, -1)">-</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

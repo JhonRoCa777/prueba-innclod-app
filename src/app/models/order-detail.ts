@@ -7,3 +7,8 @@ export interface OrderDetail {
   quantity: number,
   product?: Product
 }
+
+export interface OrderDetailRequest {
+  product_id: number,
+  quantity: number,
+}
